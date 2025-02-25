@@ -17,11 +17,8 @@ export default function SearchInput({ setKeyword }: Props) {
         { keepPreviousData: true, fallbackData: [] }
     );
 
-    const books =
-        realTimeData && realTimeData.books && realTimeData.books.length > 0
-            ? realTimeData.books
-            : [];
-
+    const books = input.length > 0 ? realTimeData.books || [] : [];
+    console.log("books = ", books);
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setInput(e.target.value);
