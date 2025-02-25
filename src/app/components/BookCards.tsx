@@ -1,9 +1,20 @@
+import { Book } from "@/model/book";
 import BookCard from "./BookCard";
 
-export default function BookCards() {
+type Props = {
+    books: Book[];
+};
+
+export default function BookCards({ books }: Props) {
     return (
         <section>
-            <BookCard />
+            <ul>
+                {books.map((book) => (
+                    <li key={book.id}>
+                        <BookCard book={book} />
+                    </li>
+                ))}
+            </ul>
         </section>
     );
 }
