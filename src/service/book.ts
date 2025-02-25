@@ -33,8 +33,8 @@ const getRandomElement = (arr: string[]) =>
 
 const BOOKS = Array.from({ length: 105 }, (_, i) => ({
     id: i + 1,
-    title: `${getRandomElement(commonTitles)} faker.book.title()`,
-    author: `${getRandomElement(commonAuthors)} faker.book.author()`,
+    title: `${getRandomElement(commonTitles)} ${faker.book.title()}`,
+    author: `${getRandomElement(commonAuthors)} ${faker.book.author()}`,
     genre: faker.book.genre(),
     content: faker.lorem.words(30),
     imageUrl: `https://picsum.photos/seed/${i + 1}/300/200`,

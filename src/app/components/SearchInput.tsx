@@ -1,7 +1,10 @@
 "use client";
 
+import { Book } from "@/model/book";
+import Link from "next/link";
 import { useState } from "react";
 import useSWR from "swr";
+import KeywordResult from "./KeywordResult";
 
 type Props = {
     setKeyword: (k: string) => void;
@@ -9,9 +12,18 @@ type Props = {
 
 export default function SearchInput({ setKeyword }: Props) {
     const [input, setInput] = useState("");
-    const { data: realTimeData } = useSWR(`/api/search?q=${input}`);
+    const { data: realTimeData, isValidating } = useSWR(
+        input.length > 0 ? `/api/search?q=${input}` : null,
+        { keepPreviousData: true, fallbackData: [] }
+    );
+
+    const books =
+        realTimeData && realTimeData.books && realTimeData.books.length > 0
+            ? realTimeData.books
+            : [];
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
         setInput(e.target.value);
     };
 
@@ -21,14 +33,17 @@ export default function SearchInput({ setKeyword }: Props) {
     };
 
     return (
-        <form onSubmit={handleSearch}>
-            <input
-                type="text"
-                value={input}
-                onChange={handleInput}
-                placeholder="please type here..."
-            />
-            <button type="submit">🔍</button>
-        </form>
+        <>
+            <form onSubmit={handleSearch}>
+                <input
+                    type="text"
+                    value={input}
+                    onChange={handleInput}
+                    placeholder="please type here..."
+                />
+                <button type="submit">🔍</button>
+            </form>
+            {books && books.length > 0 && <KeywordResult books={books} />}
+        </>
     );
 }

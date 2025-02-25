@@ -16,6 +16,8 @@ export default function BookCard({ book }: Props) {
                 height={300}
             />
             {book.title}
+            <br />
+            {book.author}
         </Link>
     );
 }

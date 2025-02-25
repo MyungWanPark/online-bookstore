@@ -1,8 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import BookCards from "./components/BookCards";
 import PaginationButtons from "./components/PaginationButtons";
 import useSWR from "swr";
-import { Book } from "@/model/book";
 import Navbar from "./components/Navbar";
 
 function getPaginaionButtons(currentPage: number, totalPages: number) {
@@ -28,7 +29,7 @@ function getPaginaionButtons(currentPage: number, totalPages: number) {
     );
 }
 
-export default async function Home() {
+export default function Home() {
     const [keyword, setKeyword] = useState("");
     const [page, setPage] = useState(1);
 
