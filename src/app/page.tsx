@@ -1,17 +1,9 @@
+import { useState } from "react";
 import BookCards from "./components/BookCards";
 import PaginationButtons from "./components/PaginationButtons";
-
-async function fetchBooks(page: number) {
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/books?page=${page}`,
-        { cache: "no-store" }
-    );
-    if (!res.ok) {
-        throw new Error("Failed to fetch books");
-    }
-
-    return res.json();
-}
+import useSWR from "swr";
+import { Book } from "@/model/book";
+import Navbar from "./components/Navbar";
 
 function getPaginaionButtons(currentPage: number, totalPages: number) {
     const maxButtons = 5;
@@ -36,19 +28,25 @@ function getPaginaionButtons(currentPage: number, totalPages: number) {
     );
 }
 
-type Props = {
-    searchParams: {
-        page?: string;
-    };
-};
+export default async function Home() {
+    const [keyword, setKeyword] = useState("");
+    const [page, setPage] = useState(1);
 
-export default async function Home({ searchParams }: Props) {
-    const page = parseInt(searchParams.page || "1", 10);
-    const { books, totalPages } = await fetchBooks(page);
+    const apiUrl = keyword
+        ? `/api/search?q=${keyword}&page=${page}`
+        : `/api/books?page=${page}`;
+    const { data, error } = useSWR(apiUrl);
+
+    if (error) return <div>데이터를 불러오는 중 오류 발생</div>;
+    if (!data) return <div>로딩 중...</div>;
+
+    const books = data.books;
+    const totalPages = data.totalPages;
     const PaginationButtonArr = getPaginaionButtons(page, totalPages);
 
     return (
         <div>
+            <Navbar setKeyword={setKeyword} />
             <BookCards books={books} />
             <PaginationButtons
                 page={page}

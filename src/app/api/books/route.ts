@@ -15,7 +15,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
         books: paginatedBooks,
-        currentPage: page,
         totalPages,
     });
 }
