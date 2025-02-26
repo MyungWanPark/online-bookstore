@@ -1,18 +1,30 @@
 import { Book } from "@/model/book";
-import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
 
 type Props = {
     books: Book[];
+    setBooks: Dispatch<SetStateAction<Book[]>>;
 };
 
-export default function KeywordResult({ books }: Props) {
+export default function KeywordResult({ books, setBooks }: Props) {
+    const router = useRouter();
+
+    const handleClick = (id: number) => {
+        setBooks([]);
+        router.push(`/book/${id}`);
+    };
     return (
-        <ul className="absolute top-12 left-80 bg-white">
+        <ul className="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
             {books.map((book: Book) => (
-                <li key={book.id}>
-                    <Link href={`/book/${book.id}`}>
-                        {book.title}:: {book.author}
-                    </Link>
+                <li key={book.id} className="border-b last:border-none">
+                    <button
+                        onClick={() => handleClick(book.id)}
+                        className="block px-4 py-2 hover:bg-gray-100 whitespace-nowrap overflow-hidden text-ellipsis"
+                    >
+                        <span className="font-semibold mr-2">{book.title}</span>
+                        <span className="text-gray-500">{book.author}</span>
+                    </button>
                 </li>
             ))}
         </ul>

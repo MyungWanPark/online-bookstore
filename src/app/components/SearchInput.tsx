@@ -13,7 +13,7 @@ export default function SearchInput() {
     const searchParams = useSearchParams();
 
     const [input, setInput] = useState(searchParams.get("q") || "");
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState<Book[]>([]);
     const { data: realTimeData, error } = useSWR(
         input.length > 0 ? `/api/search?q=${input}` : null
     );
@@ -42,7 +42,7 @@ export default function SearchInput() {
     };
 
     return (
-        <>
+        <section className="relative">
             <form onSubmit={handleSearch} className="flex items-center">
                 <input
                     type="text"
@@ -58,7 +58,9 @@ export default function SearchInput() {
                     <CiSearch />
                 </button>
             </form>
-            {books && books.length > 0 && <KeywordResult books={books} />}
-        </>
+            {books && books.length > 0 && (
+                <KeywordResult books={books} setBooks={setBooks} />
+            )}
+        </section>
     );
 }
