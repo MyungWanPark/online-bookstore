@@ -36,6 +36,7 @@ export default function SearchInput() {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim()) return;
+        setBooks([]);
         router.push(`/?q=${input}`);
     };
 

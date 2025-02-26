@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BookCards from "./components/BookCards";
 import PaginationButtons from "./components/PaginationButtons";
 import useSWR from "swr";
-import Navbar from "./components/Navbar";
 import { useSearchParams } from "next/navigation";
 
 function getPaginaionButtons(currentPage: number, totalPages: number) {
@@ -33,11 +32,13 @@ function getPaginaionButtons(currentPage: number, totalPages: number) {
 export default function Home() {
     const searchParams = useSearchParams();
     const keyword = searchParams.get("q") || "";
-    const [page, setPage] = useState(1);
+    const page = parseInt(searchParams.get("page") || "1", 10);
 
+    useEffect(() => {}, [page]);
     const apiUrl = keyword
         ? `/api/search?q=${keyword}&page=${page}`
         : `/api/books?page=${page}`;
+
     const { data, error } = useSWR(apiUrl);
 
     if (error) return <div>데이터를 불러오는 중 오류 발생</div>;
@@ -55,6 +56,9 @@ export default function Home() {
                 totalPages={totalPages}
                 PaginationButtonArr={PaginationButtonArr}
             />
+            {books.length === 0 && (
+                <div>{keyword}에 대한 검색 결과가 없습니다.</div>
+            )}
         </div>
     );
 }
