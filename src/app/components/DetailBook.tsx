@@ -5,10 +5,12 @@ import Image from "next/image";
 import StarRating from "./ui/StarRating";
 import { useEffect, useState } from "react";
 import useSWR, { mutate } from "swr";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function DetailBook() {
     const { id } = useParams();
+    const router = useRouter();
+
     const { data: book, isLoading, error } = useSWR<Book>(`/api/books/${id}`);
     const [isEditing, setIsEditing] = useState(false);
     const [editedBook, setEditedBook] = useState<Book | null>(null);
@@ -55,6 +57,20 @@ export default function DetailBook() {
             mutate(`/api/books/${id}`, updatedBook, false);
             mutate("/api/books");
             setIsEditing(false);
+        }
+    };
+
+    const handleDelete = async () => {
+        const res = await fetch(`/api/books/${id}`, {
+            method: "DELETE",
+        });
+
+        if (res.ok) {
+            alert("책이 정상적으로 삭제되었습니다.");
+            mutate("/api/books");
+            router.push("/");
+        } else {
+            alert("삭제에 실패했습니다.");
         }
     };
 
@@ -200,6 +216,14 @@ export default function DetailBook() {
                                 className="bg-blue-500 p-2 text-white rounded ml-2"
                             >
                                 저장
+                            </button>
+                        )}
+                        {!isEditing && (
+                            <button
+                                onClick={handleDelete}
+                                className="bg-red-500 p-2 text-white rounded ml-2"
+                            >
+                                삭제
                             </button>
                         )}
                     </div>

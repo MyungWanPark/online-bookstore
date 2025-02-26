@@ -1,4 +1,9 @@
-import { getAllBooks, getBookById } from "@/service/book";
+import {
+    deleteBookById,
+    getAllBooks,
+    getBookById,
+    updateBookById,
+} from "@/service/book";
 import { NextRequest, NextResponse } from "next/server";
 
 type Context = {
@@ -9,19 +14,26 @@ type Context = {
 
 export async function GET(request: NextRequest, context: Context) {
     const { id } = context.params;
-    return getBookById(id).then((data) => NextResponse.json(data));
+    const parsedId = parseInt(id, 10);
+
+    return getBookById(parsedId).then((data) => NextResponse.json(data));
 }
 
 export async function PUT(request: NextRequest, context: Context) {
     const { id } = context.params;
     const parsedId = parseInt(id, 10);
-    const books = await getAllBooks();
-
     const updatedData = await request.json();
-    books[parsedId] = {
-        ...books[parsedId],
-        ...updatedData,
-    };
 
-    return NextResponse.json(books[parsedId]);
+    const updatedBook = await updateBookById(parsedId, updatedData);
+
+    return NextResponse.json(updatedBook);
+}
+
+export async function DELETE(request: NextRequest, context: Context) {
+    const { id } = context.params;
+    const parsedId = parseInt(id, 10);
+
+    const books = await deleteBookById(parsedId);
+
+    return NextResponse.json({ message: "책이 정상적으로 삭제되었습니다." });
 }

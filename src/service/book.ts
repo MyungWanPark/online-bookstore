@@ -1,3 +1,4 @@
+import { Book } from "@/model/book";
 import { faker } from "@faker-js/faker";
 
 // 검색창 테스트용 책 제목
@@ -54,6 +55,25 @@ export async function getAllBooks() {
     return BOOKS;
 }
 
-export async function getBookById(id: string) {
-    return BOOKS.find((book) => book.id === parseInt(id, 10));
+export async function getBookById(id: number) {
+    return BOOKS.find((book) => book.id === id);
+}
+
+export async function updateBookById(id: number, updatedData: Book) {
+    const books = await getAllBooks();
+
+    books[id] = {
+        ...books[id],
+        ...updatedData,
+    };
+    return books[id];
+}
+
+export async function deleteBookById(id: number) {
+    const books = await getAllBooks();
+    const index = books.findIndex((book) => book.id === id);
+
+    books.splice(index, 1);
+
+    return books;
 }
