@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import SWRConfigContext from "./context/SWRConfigContext";
+import Navbar from "./components/Navbar";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -29,9 +30,12 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <main>
-                    <SWRConfigContext>{children}</SWRConfigContext>
-                </main>
+                <SWRConfigContext>
+                    <header>
+                        <Navbar />
+                    </header>
+                    <main>{children}</main>
+                </SWRConfigContext>
             </body>
         </html>
     );

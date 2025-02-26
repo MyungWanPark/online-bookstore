@@ -2,23 +2,32 @@
 
 import { Book } from "@/model/book";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import KeywordResult from "./KeywordResult";
+import { useRouter, useSearchParams } from "next/navigation";
 
-type Props = {
-    setKeyword: (k: string) => void;
-};
+export default function SearchInput() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
 
-export default function SearchInput({ setKeyword }: Props) {
-    const [input, setInput] = useState("");
-    const { data: realTimeData, isValidating } = useSWR(
-        input.length > 0 ? `/api/search?q=${input}` : null,
-        { keepPreviousData: true, fallbackData: [] }
+    const [input, setInput] = useState(searchParams.get("q") || "");
+    const [books, setBooks] = useState([]);
+    const { data: realTimeData, error } = useSWR(
+        input.length > 0 ? `/api/search?q=${input}` : null
     );
 
-    const books = input.length > 0 ? realTimeData.books || [] : [];
-    console.log("books = ", books);
+    useEffect(() => {
+        if (input.length === 0) {
+            setBooks([]);
+            return;
+        }
+        if (realTimeData && realTimeData.books) {
+            setBooks(realTimeData.books);
+            return;
+        }
+    }, [realTimeData]);
+
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setInput(e.target.value);
@@ -26,7 +35,8 @@ export default function SearchInput({ setKeyword }: Props) {
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        setKeyword(input);
+        if (!input.trim()) return;
+        router.push(`/?q=${input}`);
     };
 
     return (

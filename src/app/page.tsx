@@ -5,6 +5,7 @@ import BookCards from "./components/BookCards";
 import PaginationButtons from "./components/PaginationButtons";
 import useSWR from "swr";
 import Navbar from "./components/Navbar";
+import { useSearchParams } from "next/navigation";
 
 function getPaginaionButtons(currentPage: number, totalPages: number) {
     const maxButtons = 5;
@@ -30,7 +31,8 @@ function getPaginaionButtons(currentPage: number, totalPages: number) {
 }
 
 export default function Home() {
-    const [keyword, setKeyword] = useState("");
+    const searchParams = useSearchParams();
+    const keyword = searchParams.get("q") || "";
     const [page, setPage] = useState(1);
 
     const apiUrl = keyword
@@ -47,7 +49,6 @@ export default function Home() {
 
     return (
         <div>
-            <Navbar setKeyword={setKeyword} />
             <BookCards books={books} />
             <PaginationButtons
                 page={page}

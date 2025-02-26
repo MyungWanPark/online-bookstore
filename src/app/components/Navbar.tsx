@@ -5,10 +5,6 @@ import SearchInput from "./SearchInput";
 import { AiFillPlusSquare, AiOutlinePlusSquare } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 
-type Props = {
-    setKeyword: (k: string) => void;
-};
-
 const menu = [
     {
         href: "/new",
@@ -18,12 +14,12 @@ const menu = [
     },
 ];
 
-export default function Navbar({ setKeyword }: Props) {
+export default function Navbar() {
     const pathname = usePathname();
     return (
         <div className="flex justify-between px-5 py-3 bg-slate-500">
             <Link href={"/"}>Home</Link>
-            <SearchInput setKeyword={setKeyword} />
+            <SearchInput />
             <nav>
                 <ul className="flex">
                     {menu.map(({ href, icon, clickedIcon, title }) => {
