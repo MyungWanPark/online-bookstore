@@ -38,7 +38,7 @@ const getRandomPrice = () => {
 };
 
 const BOOKS = Array.from({ length: 105 }, (_, i) => ({
-    id: i + 1,
+    id: i,
     title: `${getRandomElement(commonTitles)} ${faker.book.title()}`,
     author: `${getRandomElement(commonAuthors)} ${faker.book.author()}`,
     genre: faker.book.genre(),

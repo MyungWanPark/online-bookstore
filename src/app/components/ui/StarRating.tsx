@@ -6,7 +6,6 @@ export default function StarRating({ rate }: Props) {
     return (
         <div className="flex items-center">
             {Array.from({ length: 5 }, (_, i) => {
-                console.log("i = ", i);
                 return (
                     <span
                         key={i}
