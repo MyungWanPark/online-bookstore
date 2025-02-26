@@ -61,12 +61,14 @@ export async function getBookById(id: number) {
 
 export async function updateBookById(id: number, updatedData: Book) {
     const books = await getAllBooks();
+    const index = books.findIndex((book) => book.id === id);
 
-    books[id] = {
-        ...books[id],
+    books[index] = {
+        ...books[index],
         ...updatedData,
     };
-    return books[id];
+
+    return books[index];
 }
 
 export async function deleteBookById(id: number) {
