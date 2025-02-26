@@ -49,7 +49,7 @@ export default function Home() {
     const PaginationButtonArr = getPaginaionButtons(page, totalPages);
 
     return (
-        <div>
+        <div className="container mx-auto p-4">
             <BookCards books={books} />
             <PaginationButtons
                 page={page}

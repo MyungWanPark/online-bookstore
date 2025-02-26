@@ -8,7 +8,7 @@ type Props = {
 export default function BookCards({ books }: Props) {
     return (
         <section>
-            <ul className="grid grid-cols-4 gap-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {books.map((book) => (
                     <li key={book.id}>
                         <BookCard book={book} />
