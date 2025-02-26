@@ -7,5 +7,6 @@ export type Book = {
     price: number;
     quantity: number;
     publisher: string;
+    rate: number;
     imageUrl: string;
 };

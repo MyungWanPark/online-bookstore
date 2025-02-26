@@ -2,7 +2,6 @@
 
 import DetailBook from "@/app/components/DetailBook";
 import { Book } from "@/model/book";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 

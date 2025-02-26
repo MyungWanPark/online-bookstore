@@ -46,6 +46,7 @@ const BOOKS = Array.from({ length: 105 }, (_, i) => ({
     price: getRandomPrice(),
     quantity: faker.number.int(100),
     publisher: faker.book.publisher(),
+    rate: faker.number.int({ min: 2, max: 10 }),
     imageUrl: `https://picsum.photos/seed/${i + 1}/300/200`,
 }));
 
