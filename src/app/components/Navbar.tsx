@@ -17,8 +17,10 @@ const menu = [
 export default function Navbar() {
     const pathname = usePathname();
     return (
-        <div className="flex justify-between px-5 py-3 bg-slate-500">
-            <Link href={"/"}>Home</Link>
+        <div className="flex justify-between items-center px-5 py-3 bg-slate-700 shadow-md">
+            <Link href={"/"} className="text-white text-xl font-bold">
+                Home
+            </Link>
             <SearchInput />
             <nav>
                 <ul className="flex">
@@ -28,10 +30,10 @@ export default function Navbar() {
                                 <Link
                                     href={href}
                                     aria-label={title}
-                                    className="flex items-center "
+                                    className="flex items-center text-white transition-colors duration-300 hover:text-yellow-400"
                                 >
                                     {pathname === href ? clickedIcon : icon}
-                                    {title}
+                                    <span className="ml-2">{title}</span>
                                 </Link>
                             </li>
                         );
