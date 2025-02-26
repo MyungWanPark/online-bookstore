@@ -74,39 +74,44 @@ export default function DetailBook() {
         }
     };
 
+    const INPUT_CSS = "p-1 outline-none border border-gray-300 rounded";
+
     return (
         <section className="flex p-4">
             {isLoading && <div>로딩 중입니다...</div>}
-
             {book && (
-                <>
-                    <div>
+                <div className="flex flex-col md:flex-row md:justify-evenly">
+                    <div className="md:w-1/3 md:my-auto">
                         <Image
                             src={imageUrl}
                             alt={title}
-                            width={500}
+                            width={600}
                             height={800}
+                            className="rounded-lg object-cover"
                         />
                     </div>
-                    <div className="pl-4">
-                        {!isEditing ? (
-                            <p className="text-2xl font-bold">{title}</p>
-                        ) : (
-                            <input
-                                className=""
-                                value={editedBook.title}
-                                name="title"
-                                onChange={handleChange}
-                            />
-                        )}
+                    <div className="md:w-1/2">
+                        <p className="flex items-center">
+                            <span className="mr-2">제목:</span>
+                            {!isEditing ? (
+                                <h1 className="text-3xl font-bold">{title}</h1>
+                            ) : (
+                                <input
+                                    className="w-1/2 p-2 mt-2 rounded outline-none border border-gray-300"
+                                    value={editedBook.title}
+                                    name="title"
+                                    onChange={handleChange}
+                                />
+                            )}
+                        </p>
 
-                        <p>
+                        <p className="my-2">
                             저자:{" "}
                             {!isEditing ? (
                                 <span>{author}</span>
                             ) : (
                                 <input
-                                    className=""
+                                    className={`${INPUT_CSS} w-1/5`}
                                     value={editedBook.author}
                                     name="author"
                                     onChange={handleChange}
@@ -117,7 +122,7 @@ export default function DetailBook() {
                                 <span>{publisher}</span>
                             ) : (
                                 <input
-                                    className=""
+                                    className={`${INPUT_CSS} w-1/5`}
                                     value={editedBook.publisher}
                                     name="publisher"
                                     onChange={handleChange}
@@ -129,14 +134,14 @@ export default function DetailBook() {
                                 <span>{genre}</span>
                             ) : (
                                 <input
-                                    className=""
+                                    className={`${INPUT_CSS} w-1/5`}
                                     value={editedBook.genre}
                                     name="genre"
                                     onChange={handleChange}
                                 />
                             )}
                         </p>
-                        <div className="flex">
+                        <div className="flex items-center my-1">
                             <StarRating rate={rate} />
                             {!isEditing ? (
                                 <span className="ml-2 relative top-[2px]">
@@ -144,7 +149,7 @@ export default function DetailBook() {
                                 </span>
                             ) : (
                                 <input
-                                    className="w-5 relative top-[2px]"
+                                    className={`${INPUT_CSS} w-5 relative top-[2px] py-[1px]`}
                                     value={editedBook.rate}
                                     name="rate"
                                     onChange={handleChange}
@@ -159,7 +164,7 @@ export default function DetailBook() {
                                     <span>{price}</span>
                                 ) : (
                                     <input
-                                        className="w-12"
+                                        className={`${INPUT_CSS} w-[10%] py-[1px]`}
                                         value={editedBook.price}
                                         name="price"
                                         onChange={handleChange}
@@ -178,7 +183,7 @@ export default function DetailBook() {
                                     <span>{quantity}</span>
                                 ) : (
                                     <input
-                                        className="w-4"
+                                        className={`${INPUT_CSS} w-[5%] py-[1px]`}
                                         value={editedBook.quantity}
                                         name="quantity"
                                         onChange={handleChange}
@@ -193,7 +198,7 @@ export default function DetailBook() {
                                 <p>{content}</p>
                             ) : (
                                 <textarea
-                                    className="w-full border p-1 rounded h-20"
+                                    className={`${INPUT_CSS} w-full border p-1 rounded h-20`}
                                     value={editedBook.content}
                                     name="content"
                                     onChange={handleChange}
@@ -227,7 +232,7 @@ export default function DetailBook() {
                             </button>
                         )}
                     </div>
-                </>
+                </div>
             )}
         </section>
     );

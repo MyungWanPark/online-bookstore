@@ -20,7 +20,7 @@ export default function KeywordResult({ books, setBooks }: Props) {
                 <li key={book.id} className="border-b last:border-none">
                     <button
                         onClick={() => handleClick(book.id)}
-                        className="block px-4 py-2 hover:bg-gray-100 whitespace-nowrap overflow-hidden text-ellipsis"
+                        className="block w-full px-4 py-2 hover:bg-gray-100 whitespace-nowrap overflow-hidden text-ellipsis"
                     >
                         <span className="font-semibold mr-2">{book.title}</span>
                         <span className="text-gray-500">{book.author}</span>
