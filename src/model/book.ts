@@ -4,5 +4,8 @@ export type Book = {
     author: string;
     genre: string;
     content: string;
+    price: number;
+    quantity: number;
+    publisher: string;
     imageUrl: string;
 };
