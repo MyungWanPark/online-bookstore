@@ -80,24 +80,24 @@ export default function DetailBook() {
         <section className="flex p-4">
             {isLoading && <div>로딩 중입니다...</div>}
             {book && (
-                <div className="flex flex-col md:flex-row md:justify-evenly">
-                    <div className="md:w-1/3 md:my-auto">
+                <div className="grid md:grid-cols-2 place-items-center gap-5 md:gap-2">
+                    <div className="">
                         <Image
                             src={imageUrl}
                             alt={title}
-                            width={600}
+                            width={500}
                             height={800}
-                            className="rounded-lg object-cover"
+                            className="rounded-lg object-cover h-full"
                         />
                     </div>
-                    <div className="md:w-1/2">
+                    <div className="">
                         <p className="flex items-center">
                             <span className="mr-2">제목:</span>
                             {!isEditing ? (
                                 <h1 className="text-3xl font-bold">{title}</h1>
                             ) : (
                                 <input
-                                    className="w-1/2 p-2 mt-2 rounded outline-none border border-gray-300"
+                                    className="w-1/2 p-2 rounded outline-none border border-gray-300"
                                     value={editedBook.title}
                                     name="title"
                                     onChange={handleChange}
