@@ -1,5 +1,5 @@
 
-### 배포 링크 클릭
+### 배포 링크 클릭(Vercel 호스팅 이용)
 [온라인 서점](https://online-bookstore-six.vercel.app/) <br/>
 
 ### 상세 문서 클릭
