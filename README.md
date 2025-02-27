@@ -37,7 +37,7 @@ npm -v
 
 ```bash
 apt install -y git
-git clone https://github.com/your-repo/your-nextjs-project.git /app
+git clone https://github.com/MyungWanPark/online-bookstore.git /app
 ```
 
 5. 의존성 설치를 진행합니다.
