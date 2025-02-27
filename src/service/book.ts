@@ -33,21 +33,20 @@ const getRandomElement = (arr: string[]) =>
     arr[Math.floor(Math.random() * arr.length)];
 
 const getRandomPrice = () => {
-    const number = faker.commerce.price({ min: 10, max: 20, dec: 0 });
-    const parsedNum = parseInt(number, 10);
-    return parsedNum * 1000;
+    const number = faker.datatype.number({ min: 10, max: 20 });
+    return number * 1000;
 };
 
 const BOOKS = Array.from({ length: 105 }, (_, i) => ({
     id: i,
-    title: `${getRandomElement(commonTitles)} ${faker.book.title()}`,
-    author: `${getRandomElement(commonAuthors)} ${faker.book.author()}`,
-    genre: faker.book.genre(),
+    title: `${getRandomElement(commonTitles)} ${faker.lorem.words(3)}`,
+    author: `${getRandomElement(commonAuthors)} ${faker.name.fullName()}`,
+    genre: faker.music.genre(),
     content: faker.lorem.words(30),
     price: getRandomPrice(),
-    quantity: faker.number.int(100),
-    publisher: faker.book.publisher(),
-    rate: faker.number.int({ min: 2, max: 10 }),
+    quantity: faker.datatype.number(100),
+    publisher: faker.company.name(),
+    rate: faker.datatype.number({ min: 2, max: 10 }),
     imageUrl: `https://picsum.photos/seed/${i + 1}/300/200`,
 }));
 
