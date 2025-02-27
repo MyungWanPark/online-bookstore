@@ -1,3 +1,6 @@
+
+> 배포 링크 클릭: &nbsp;&nbsp;[온라인 서점](https://online-bookstore-six.vercel.app/) <br/>
+
 ## Ubuntu 18.04 실행 환경: **Node.js v16, Next.js v13** <br/>
 (Node 16 이유: Ubuntu 18.04의 기본 `libc6` 라이브러리 버전(2.27)이 Node.js 18이 요구하는 2.28 이상보다 낮았기 때문입니다.)
 
