@@ -1,7 +1,6 @@
 "use client";
 
 import { Book } from "@/model/book";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import KeywordResult from "./KeywordResult";
@@ -14,7 +13,7 @@ export default function SearchInput() {
 
     const [input, setInput] = useState(searchParams.get("q") || "");
     const [books, setBooks] = useState<Book[]>([]);
-    const { data: realTimeData, error } = useSWR(
+    const { data: realTimeData } = useSWR(
         input.length > 0 ? `/api/search?q=${input}` : null
     );
 
@@ -27,7 +26,7 @@ export default function SearchInput() {
             setBooks(realTimeData.books);
             return;
         }
-    }, [realTimeData]);
+    }, [realTimeData, input.length]);
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();

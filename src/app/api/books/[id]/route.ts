@@ -1,9 +1,4 @@
-import {
-    deleteBookById,
-    getAllBooks,
-    getBookById,
-    updateBookById,
-} from "@/service/book";
+import { deleteBookById, getBookById, updateBookById } from "@/service/book";
 import { NextRequest, NextResponse } from "next/server";
 
 type Context = {
@@ -33,7 +28,7 @@ export async function DELETE(request: NextRequest, context: Context) {
     const { id } = context.params;
     const parsedId = parseInt(id, 10);
 
-    const books = await deleteBookById(parsedId);
+    await deleteBookById(parsedId);
 
     return NextResponse.json({ message: "책이 정상적으로 삭제되었습니다." });
 }

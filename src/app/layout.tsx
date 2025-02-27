@@ -28,13 +28,13 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} w-full`}
             >
                 <SWRConfigContext>
                     <header>
                         <Navbar />
                     </header>
-                    <main>{children}</main>
+                    <main className="">{children}</main>
                 </SWRConfigContext>
             </body>
         </html>

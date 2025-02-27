@@ -4,6 +4,7 @@ import Link from "next/link";
 import SearchInput from "./SearchInput";
 import { AiFillPlusSquare, AiOutlinePlusSquare } from "react-icons/ai";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 
 const menu = [
     {
@@ -21,7 +22,9 @@ export default function Navbar() {
             <Link href={"/"} className="text-white text-xl font-bold">
                 Home
             </Link>
-            <SearchInput />
+            <Suspense fallback={<p>Loading...</p>}>
+                <SearchInput />
+            </Suspense>
             <nav>
                 <ul className="flex">
                     {menu.map(({ href, icon, clickedIcon, title }) => {

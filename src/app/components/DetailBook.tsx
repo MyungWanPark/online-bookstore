@@ -11,7 +11,7 @@ export default function DetailBook() {
     const { id } = useParams();
     const router = useRouter();
 
-    const { data: book, isLoading, error } = useSWR<Book>(`/api/books/${id}`);
+    const { data: book, isLoading } = useSWR<Book>(`/api/books/${id}`);
     const [isEditing, setIsEditing] = useState(false);
     const [editedBook, setEditedBook] = useState<Book | null>(null);
 
