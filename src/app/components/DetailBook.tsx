@@ -192,7 +192,7 @@ export default function DetailBook() {
                                 <span>권</span>
                             </p>
                         </div>
-                        <div>
+                        <div className="mb-2">
                             <span>줄거리:</span>
                             {!isEditing ? (
                                 <p>{content}</p>
