@@ -52,7 +52,6 @@ export default function Home() {
         <div className="container mx-auto p-4">
             <BookCards books={books} />
             <PaginationButtons
-                page={page}
                 totalPages={totalPages}
                 PaginationButtonArr={PaginationButtonArr}
             />
