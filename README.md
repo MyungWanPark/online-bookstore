@@ -12,7 +12,7 @@
 
 실행 명령어는 다음과 같습니다. 
 
-1. 도커 컨테이너 생성 및 실행
+1. 도커 컨테이너 생성 및 실행(3000번 포트 사용)
    
 ```bash
 docker run -it --name set-container-name -p 3000:3000 ubuntu:18.04 /bin/bash
